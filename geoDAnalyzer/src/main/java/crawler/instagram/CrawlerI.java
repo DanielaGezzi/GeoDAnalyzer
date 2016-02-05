@@ -19,8 +19,8 @@ public class CrawlerI {
 	public static void startSearch(String queryParam) throws Exception{
 	
 		/*InstagramService service = new InstagramAuthService()
-				.apiKey("db37708863204bd6a4985e79e6f00084")
-				.apiSecret("5ea0921249a94db89a31eb99c12a5ecc")
+				.apiKey("*")
+				.apiSecret("*")
 				.callback("http://localhost/geoDAnalyzer")
 				.build();
 		
@@ -28,7 +28,7 @@ public class CrawlerI {
 		
 		service.getAccessToken(arg0, arg1)
 		Instagram instagram = service.getInstagram(accessToken);*/
-		Instagram instagram = new Instagram("43e80f5cfdb44e45b05f46bf1387b578");
+		Instagram instagram = new Instagram("*");
 
 		try {
 			System.out.println(instagram.searchMedia(48.858844, 2.294351));
