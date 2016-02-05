@@ -9,10 +9,10 @@ public class Login {
 		cb.setDebugEnabled(true);
 		cb.setJSONStoreEnabled(true);
 		
-		cb.setOAuthConsumerKey("5tzGoXRsAQHXKiFBAdJg7AvQg");
-		cb.setOAuthConsumerSecret("VgRj6Wpg68nXciqGrzASuqQpnp6Ik1pcs9lyYR7HjCVIn2JncV");
-		cb.setOAuthAccessToken("271882972-C2vIeMqg76wOO2PVFRRCpbrH7QlZh4yRwpWoajKJ");
-		cb.setOAuthAccessTokenSecret("xMPsGT0mEcRt0i6rENPBNmerco36zxme29cKxLglUSP58");
+		cb.setOAuthConsumerKey("*");
+		cb.setOAuthConsumerSecret("*");
+		cb.setOAuthAccessToken("*");
+		cb.setOAuthAccessTokenSecret("*");
 
 		return cb;
 	}
