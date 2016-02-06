@@ -3,12 +3,19 @@ package geoDAnalyzer.geoDAnalyzer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import crawler.twitter.CrawlerT;
 import facade.FacadeGeoData;
 import facade.impl.FacadeGeoDataImpl;
 import model.Location;
@@ -47,6 +54,19 @@ public class MyResource {
 		
 		return results;}
     
+    @POST
+    @Path("/admin/search/twitter")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response searchOnTwitter(@FormParam("queryParam") String queryParam){
+    	System.out.println(queryParam);
+    	try {
+			CrawlerT.startSearch(queryParam);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).build();
+		}
+		return Response.status(200).build();
+    }
     /*@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String prova(){

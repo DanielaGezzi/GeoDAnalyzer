@@ -1,28 +1,20 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>GeoDataSearcher</title>
-<link href="css/landing.css" rel="stylesheet"> 
+<title>GeoDataSearcher - AdminSearch</title>
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-material-design.css" rel="stylesheet">
- 
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/material.js"></script>
-<script src="js/oms.min.js"></script>
-<script type="text/javascript" src="js/landing.js"></script>
-
-<style>
-      #map-canvas {
-        width: 1000px;
-        height: 400px;
-      }
-    </style>
+<script src="js/admin.js"></script>
     
 </head>
-<body onload="initialize()">
+<body>
 <div class="row">
 <div class="col-md-12">
 <nav class="navbar navbar-default">
@@ -40,26 +32,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-        <li><a href="admin.jsp">Admin</a></li>
+        <li><a href="index.jsp">Home</a></li>
+        <li class="active"><a href="#">Admin<span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-right">
-        <div class="form-group">
-          <input id="address" type="text" class="form-control" placeholder="Insert Location">
-        </div>
-        <button id="searchButton" type="button" value="Search" class="btn btn-default">Search</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
-        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 </div>
 </div>
-
-
- <div id="map-canvas" style="width: 1000px; height: 480px;" align="center"></div>
-  </body>
+	<div id="searchdivTwitter">
+      <form id="searchTwitter" name="searchTwitter">
+        <input id="queryParam" name="queryParam" type="text" class="form-control" placeholder="Insert Keyword">     
+        <button id="searchButtonTwitter" type="submit" value="Search" class="btn btn-default">Search</button>
+      </form>
+     </div>
+</body>
 
 </html>
