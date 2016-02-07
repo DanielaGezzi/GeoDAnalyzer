@@ -18,7 +18,7 @@ public class CrawlerT {
 	private static final int TWEETS_FOR_PAGE = 100;
 
 	
-	public static void startSearch(String queryParam) throws Exception {
+	public void startSearch(String queryParam) throws Exception{
 		/*auth in order to access twitter dev*/
 		Login login = new Login(); 
 		ConfigurationBuilder cb = login.start();
@@ -101,11 +101,4 @@ public class CrawlerT {
 
 	}
 
-	public static void main(String[] args){
-		try {
-			startSearch("evento");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

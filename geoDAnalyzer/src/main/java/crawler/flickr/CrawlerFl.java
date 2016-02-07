@@ -16,7 +16,7 @@ import model.Location;
 
 public class CrawlerFl {
 	
-	public static void startSearch(String queryParam) throws Exception{
+	public void startSearch(String queryParam) throws Exception{
 		
 		Login login = new Login();
 		
@@ -85,13 +85,7 @@ public class CrawlerFl {
 			
 			}
 		}
-	public static void main(String[] args){
-		try {
-			startSearch("Milano");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }
 	
 

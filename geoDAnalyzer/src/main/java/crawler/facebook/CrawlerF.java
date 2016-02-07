@@ -14,7 +14,7 @@ import model.Location;
 
 public class CrawlerF {
 	
-			public static void startSearch(String queryParam) throws Exception {
+			public void startSearch(String queryParam) throws Exception {
 				/*auth in order to access facebook dev*/
 				Login login = new Login(); 
 				ConfigurationBuilder cb = login.start();
@@ -37,13 +37,12 @@ public class CrawlerF {
 					
 							System.out.println("Facebook Exception" + e.getErrorCode());
 							System.out.println(e.getErrorMessage());
-							Thread.sleep((30)*1000);
 							
 				}
 				
 			}
 
-			public static void manageSearchResult(ResponseList<Event> results) throws Exception {
+			public static void manageSearchResult(ResponseList<Event> results){
 				
 				for (Event event : results) {
 					
@@ -82,13 +81,6 @@ public class CrawlerF {
 				
 				}
 			}
-		public static void main(String[] args){
-			try {
-				startSearch("Roma");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 
 	}
 

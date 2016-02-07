@@ -47,11 +47,11 @@ public class GeoDataMONGO implements GeoDataRepository {
 			
 			System.out.println("Duplicate found");
 			
-			} catch (Exception e){
+		} catch (Exception e){
 			
 			e.printStackTrace();
 			
-			}
+		}
 			
 		}
 

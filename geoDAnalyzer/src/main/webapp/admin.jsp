@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
@@ -42,12 +40,30 @@
 </nav>
 </div>
 </div>
-	<div id="searchdivTwitter">
+<div class = "row">
+<div class="col-md-3">
+<div class="container-fluid">
+	<div id="searchTwitterContainer" style="display: in-line">
       <form id="searchTwitter" name="searchTwitter">
-        <input id="queryParam" name="queryParam" type="text" class="form-control" placeholder="Insert Keyword">     
-        <button id="searchButtonTwitter" type="submit" value="Search" class="btn btn-default">Search</button>
+        <input id="queryParamT" name="queryParam" type="text" class="form-control" placeholder="Insert Keyword">     
       </form>
+       <button id="buttonTwitter" type="submit" class="btn btn-default">Search on Twitter</button>
      </div>
+     <div id="searchFacebookContainer">
+      <form id="searchFacebook" name="searchFacebook">
+        <input id="queryParamF" name="queryParamF" type="text" class="form-control" placeholder="Insert Keyword"> 
+      </form>
+        <button id="buttonFacebook" type="submit" class="btn btn-default">Search on Facebook</button>
+     </div>
+     <div id="searchFlickrContainer">
+      <form id="searchFlickr" name="searchFlickr">
+        <input id="queryParamFl" name="queryParam" type="text" class="form-control" placeholder="Insert Keyword">     
+      </form>
+		<button id="buttonFlickr" type="submit" class="btn btn-default">Search on Flickr</button>
+     </div>
+    </div>
+   </div>
+  </div>
 </body>
 
 </html>

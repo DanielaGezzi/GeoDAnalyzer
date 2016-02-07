@@ -1,9 +1,10 @@
 package geoDAnalyzer.geoDAnalyzer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -15,10 +16,16 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.flickr4java.flickr.FlickrException;
+import com.google.gson.Gson;
+
+import crawler.facebook.CrawlerF;
+import crawler.flickr.CrawlerFl;
 import crawler.twitter.CrawlerT;
 import facade.FacadeGeoData;
 import facade.impl.FacadeGeoDataImpl;
 import model.Location;
+import twitter4j.TwitterException;
 import model.GeoData;
 
 /**
@@ -56,12 +63,57 @@ public class MyResource {
     
     @POST
     @Path("/admin/search/twitter")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response searchOnTwitter(@FormParam("queryParam") String queryParam){
-    	System.out.println(queryParam);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response searchOnTwitter(String queryParam){
+    	Gson gson = new Gson();
+    	@SuppressWarnings("unchecked")
+		Map<String, String> map = gson.fromJson(queryParam, Map.class);    	
+    	CrawlerT ct = new CrawlerT();
     	try {
-			CrawlerT.startSearch(queryParam);
-		} catch (Exception e) {
+			ct.startSearch(map.get("param"));
+		}catch (TwitterException e){
+			return Response.status(409).build();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).build();
+		}
+		return Response.status(200).build();
+    }
+    
+    @POST
+    @Path("/admin/search/facebook")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response searchOnFacebook(String queryParam){
+    	Gson gson = new Gson();
+    	@SuppressWarnings("unchecked")
+		Map<String, String> map = gson.fromJson(queryParam, Map.class);
+    	CrawlerF cf = new CrawlerF();
+    	try {
+			cf.startSearch(map.get("param"));
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).build();
+		}
+		return Response.status(200).build();
+    }
+    
+    @POST
+    @Path("/admin/search/flickr")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response searchOnFlickr(String queryParam){
+    	Gson gson = new Gson();
+    	@SuppressWarnings("unchecked")
+		Map<String, String> map = gson.fromJson(queryParam, Map.class);
+    	CrawlerFl cfl = new CrawlerFl();
+    	try {
+			cfl.startSearch(map.get("param"));
+		}catch (FlickrException e){
+			System.out.println("flickr exception");
+			return Response.status(400).build();
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(500).build();
 		}
