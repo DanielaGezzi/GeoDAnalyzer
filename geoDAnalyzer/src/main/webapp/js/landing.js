@@ -161,6 +161,7 @@ $(document).ready(function(){
 		    }//chiudo else
 		  });//chiudo geocoder.geocode
 	});//chiudo search button on click
+	
 });//chiudo document ready
 
 

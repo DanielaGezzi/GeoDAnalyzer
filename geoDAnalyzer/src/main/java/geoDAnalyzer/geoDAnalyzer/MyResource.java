@@ -1,32 +1,29 @@
 package geoDAnalyzer.geoDAnalyzer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.flickr4java.flickr.FlickrException;
 import com.google.gson.Gson;
-
 import crawler.facebook.CrawlerF;
 import crawler.flickr.CrawlerFl;
 import crawler.twitter.CrawlerT;
+import facade.FacadeAdministrativeArea;
 import facade.FacadeGeoData;
+import facade.impl.FacadeAdministrativeAreaImpl;
 import facade.impl.FacadeGeoDataImpl;
-import model.Location;
+import model.AdministrativeArea.AdministrativeArea;
+import model.GeoData.GeoData;
+import model.GeoData.Location;
 import twitter4j.TwitterException;
-import model.GeoData;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -44,7 +41,7 @@ public class MyResource {
     @GET
 	@Path("/events/{lat}/{lon}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<GeoData> getResults(@PathParam("lat") double latitude,
+	public List<GeoData> getResultsProximity(@PathParam("lat") double latitude,
 									@PathParam("lon") double longitude){
 		FacadeGeoData facadeGeoData = new FacadeGeoDataImpl();
 		List<GeoData> results = new ArrayList<GeoData>();
@@ -58,8 +55,28 @@ public class MyResource {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		return results;}
+    
+    @GET
+	@Path("/events/area/{lat}/{lon}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<AdministrativeArea> getResultsWhatArea(@PathParam("lat") double latitude,
+									@PathParam("lon") double longitude){
+		FacadeAdministrativeArea facadeAdminData = new FacadeAdministrativeAreaImpl();
+		List<AdministrativeArea> results = new ArrayList<AdministrativeArea>();
+		Location location = new Location();
+		location.setType("Point");
+		double[] coord = {longitude,latitude};
+		location.setCoordinates(coord);
+		try{
+		results = facadeAdminData.getGeoDataAdminArea(location);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(results);
+		return results
+	;}
     
     @POST
     @Path("/admin/search/twitter")
@@ -119,9 +136,5 @@ public class MyResource {
 		}
 		return Response.status(200).build();
     }
-    /*@GET
-	@Produces(MediaType.TEXT_HTML)
-	public String prova(){
-		return "Hello World!";
-	}*/
+    
 }

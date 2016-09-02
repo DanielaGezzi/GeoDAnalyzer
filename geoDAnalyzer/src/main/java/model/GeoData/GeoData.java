@@ -1,13 +1,15 @@
-package model;
+package model.GeoData;
 
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.bson.types.ObjectId;
+
 @XmlRootElement
 public class GeoData {
-	private Object _id;
+	private ObjectId _id;
 	private String id;
 	private String platform;
 	private String title;
@@ -83,11 +85,11 @@ public class GeoData {
 				+ body + ", date=" + date + "," + location + "]";
 	}
 	@XmlTransient
-	public String get_id() {
-		return (String) _id;
+	public ObjectId get_id() {
+		return (ObjectId) _id;
 	}
 	@XmlTransient
-	public void set_id(String _id) {
-		this._id = _id;
+	public void set_id(ObjectId _id) {
+		this._id = (ObjectId) _id;
 	}
 }

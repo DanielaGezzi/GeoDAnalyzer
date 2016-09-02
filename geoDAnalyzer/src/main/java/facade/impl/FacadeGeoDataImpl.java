@@ -2,11 +2,9 @@ package facade.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import facade.FacadeGeoData;
-import model.GeoData;
-import model.Location;
+import model.GeoData.GeoData;
+import model.GeoData.Location;
 import persistence.GeoDataRepository;
 import persistence.mongo.GeoDataMONGO;
 
@@ -44,5 +42,22 @@ public class FacadeGeoDataImpl implements FacadeGeoData {
 		}
 		return results;
 	}
+
+	@Override
+	public List<GeoData> getGeoDataWithinArea(double[][][][] multiPolygonArea) {
+		GeoDataRepository geoDataREP = new GeoDataMONGO();
+		List<GeoData> results = new ArrayList<GeoData>();
+		try{
+			
+			results = geoDataREP.findWithinMultiPolygon(multiPolygonArea);
+			
+		} catch(Exception e){
+			
+			e.printStackTrace();
+			
+		}
+		return results;
+	}
+	
 
 }
