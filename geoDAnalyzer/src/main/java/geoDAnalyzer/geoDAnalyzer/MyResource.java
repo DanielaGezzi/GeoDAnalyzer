@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.flickr4java.flickr.FlickrException;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import crawler.facebook.CrawlerF;
 import crawler.flickr.CrawlerFl;
 import crawler.twitter.CrawlerT;
@@ -21,7 +23,6 @@ import facade.FacadeGeoData;
 import facade.impl.FacadeAdministrativeAreaImpl;
 import facade.impl.FacadeGeoDataImpl;
 import model.AdministrativeArea.AdministrativeArea;
-import model.GeoData.GeoData;
 import model.GeoData.Location;
 import twitter4j.TwitterException;
 
@@ -41,10 +42,10 @@ public class MyResource {
     @GET
 	@Path("/events/{lat}/{lon}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<GeoData> getResultsProximity(@PathParam("lat") double latitude,
+	public String getResultsProximity(@PathParam("lat") double latitude,
 									@PathParam("lon") double longitude){
 		FacadeGeoData facadeGeoData = new FacadeGeoDataImpl();
-		List<GeoData> results = new ArrayList<GeoData>();
+		List<JsonObject> results = new ArrayList<JsonObject>();
 		Location location = new Location();
 		location.setType("Point");
 		double[] coord = {longitude,latitude};
@@ -55,7 +56,7 @@ public class MyResource {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return results;}
+		return results.toString();}
     
     @GET
 	@Path("/events/area/{lat}/{lon}")

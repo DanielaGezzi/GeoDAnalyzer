@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.bson.types.ObjectId;
 
+
 @XmlRootElement
 public class AdministrativeArea {
 	
@@ -14,16 +15,16 @@ public class AdministrativeArea {
 	
 	public AdministrativeArea(){
 		super();
-	}
+ 	}
 
-	public Object get_id() {
+	public ObjectId get_id() {
 		return _id;
 	}
 
-	public void set_id(Object _id) {
-		this._id = (ObjectId) _id;
+	public void set_id(ObjectId _id) {
+		this._id = _id;
 	}
-
+	
 	public String getType() {
 		return type;
 	}

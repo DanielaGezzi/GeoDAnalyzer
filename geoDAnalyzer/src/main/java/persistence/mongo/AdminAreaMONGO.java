@@ -67,7 +67,9 @@ public class AdminAreaMONGO implements AdminAreaRepository {
 	List<AdministrativeArea> result = new ArrayList<AdministrativeArea>();
 	Gson gson = new Gson();
 	for(BasicDBObject o : list){
+		System.out.println(o.get("_id"));
 		AdministrativeArea adminArea = gson.fromJson(o.toString(), AdministrativeArea.class);
+		adminArea.set_id((ObjectId) o.get("_id"));
 		result.add(adminArea);}
 	return result;
 	

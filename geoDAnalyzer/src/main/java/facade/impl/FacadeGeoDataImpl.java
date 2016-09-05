@@ -2,6 +2,9 @@ package facade.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.JsonObject;
+
 import facade.FacadeGeoData;
 import model.GeoData.GeoData;
 import model.GeoData.Location;
@@ -27,9 +30,9 @@ public class FacadeGeoDataImpl implements FacadeGeoData {
 	}
 
 	@Override
-	public List<GeoData> getGeoDataProximity(Location location) {
+	public List<JsonObject> getGeoDataProximity(Location location) {
 		GeoDataRepository geoDataREP = new GeoDataMONGO();
-		List<GeoData> results = new ArrayList<GeoData>();
+		List<JsonObject> results = new ArrayList<JsonObject>();
 		
 		try{
 			

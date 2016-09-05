@@ -58,8 +58,23 @@
 </div>
 </div>
 
-
- <div id="map-canvas" style="width: 1000px; height: 480px;" align="center"></div>
+<div class="row">
+	<div class="col-md-8">
+	 	<div id="map-canvas" style="width: 900px; height: 480px;" align="center"></div>
+	</div>
+	<div class="col-md-4" style="height: 480px">
+	<div id="buttons">
+		<button id="Twitter_Button" type="button" value="Twitter" class="btn btn-default">Twitter</button>
+		<button id="Facebook_Button" type="button" value="Facebook" class="btn btn-default">Facebook</button>
+		<button id="Flickr_Button" type="button" value="Flickr" class="btn btn-default">Flickr</button>
+	</div>
+	<div id="SN_table" style="overflow:auto">
+		<div id="Twitter_table" style="height: 420px; overflow:auto; display:none"></div>
+		<div id="Facebook_table" style="height: 420px; overflow:auto"></div>
+		<div id="Flickr_table" style="height: 420px; overflow:auto; display:none"></div>
+	</div>
+	</div>
+</div>
   </body>
 
 </html>

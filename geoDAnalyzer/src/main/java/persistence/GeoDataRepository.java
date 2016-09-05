@@ -10,7 +10,8 @@ import model.GeoData.Location;
 public interface GeoDataRepository {
 	
 	void saveGeoData(GeoData geoData);
-	List<GeoData> findProximity(Location location);
+	List<JsonObject> findProximity(Location location);
+	//List<GeoData> findProximity(Location location);
 	List<GeoData> findWithinMultiPolygon (double[][][][] multiPolygonArea);
 
 	

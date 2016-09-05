@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 @XmlRootElement
 public class GeoData {
 	private ObjectId _id;
+	private ObjectId _idAdminArea;
 	private String id;
 	private String platform;
 	private String title;
@@ -22,10 +23,11 @@ public class GeoData {
 		super();
 	}
 	
-	public GeoData(String id, String platform, String title, String author, 
+	public GeoData(String id, ObjectId _idAdminArea, String platform, String title, String author, 
 			String body, Date date, Location location){
 		
 		this.id = id;
+		this._idAdminArea = _idAdminArea;
 		this.platform = platform;
 		this.title = title;
 		this.author = author;
@@ -40,6 +42,15 @@ public class GeoData {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public ObjectId get_idAdminArea() {
+		return _idAdminArea;
+	}
+
+	public void set_idAdminArea(ObjectId _idAdminArea) {
+		this._idAdminArea = _idAdminArea;
+	}
+
 	public String getPlatform() {
 		return platform;
 	}
@@ -81,7 +92,7 @@ public class GeoData {
 
 	@Override
 	public String toString() {
-		return "GeoData [id=" + id + ", platform=" + platform + ", title=" + title + ", author=" + author + ", body="
+		return "GeoData [id=" + id + ", idArea=" + _idAdminArea.toString() + ", platform=" + platform + ", title=" + title + ", author=" + author + ", body="
 				+ body + ", date=" + date + "," + location + "]";
 	}
 	@XmlTransient

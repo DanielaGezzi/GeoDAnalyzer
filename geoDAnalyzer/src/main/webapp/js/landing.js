@@ -91,6 +91,11 @@ $(document).ready(function(){
 			     	 	            }
 			     	 	        }(document, "script", "twitter-wjs");
 			     	 	    });	*/
+			     	 		var table = $('<table></table>');
+			     	 		var row = $('<tr></tr>').append(text);
+			     	 		table.append(row);
+			     	 		$('#Twitter_table').append(table);
+			     	 	
 		        		 }//chiudo if twitter
 		        		 else if (val.platform == "Facebook"){
 		        			 var body = "no description available";
@@ -136,6 +141,11 @@ $(document).ready(function(){
 			     	 	            }
 			     	 	        }(document, "script", "facebook-jssdk");
 			     	 	    });*/
+							var texttable = "<div class=\"infowindow-content\"\"><blockquote class=\"facebook-event\" style=\"width:350px\"\ lang=\"en\"><p>"+val.title+"</p>" + body +" </br><a href=\"https://www.facebook.com/events/"+val.id+"\">more...</a></br>" + val.areaRegion + "</blockquote></div>";
+			     	 		var table = $('<table></table>');
+			     	 		var row = $('<tr></tr>').append(texttable);
+			     	 		table.append(row);
+			     	 		$('#Facebook_table').append(table);
 		        		 }//chiudo if facebook
 		        		 else if (val.platform == "Flickr"){
 		        			 var text = "<img src=\""+val.body+"\"></br><a href=\""+val.title+"\">view on Flickr -></a>";
@@ -149,7 +159,10 @@ $(document).ready(function(){
 			     	 		
 			     	 		oms.addMarker(marker);
 			     	 		     	   
-			     	 
+			     	 		var table = $('<table></table>');
+			     	 		var row = $('<tr></tr>').append(text);
+			     	 		table.append(row);
+			     	 		$('#Flickr_table').append(table);
 		        		 }//chiudo if Flickr
 	     	 		});//chiudo each
 
