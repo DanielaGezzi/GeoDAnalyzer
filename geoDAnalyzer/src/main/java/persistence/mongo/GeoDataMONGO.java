@@ -22,6 +22,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
+import model.AdministrativeArea.Geometry;
 import model.GeoData.GeoData;
 import model.GeoData.Location;
 import persistence.GeoDataRepository;
@@ -92,9 +93,10 @@ public class GeoDataMONGO implements GeoDataRepository {
 	} */
 	
 	/*find GeoDatas inside a specified MultiPolygon Administrative Area*/
-	public List<GeoData> findWithinMultiPolygon (double[][][][] multiPolygonArea){
+	public List<GeoData> findWithinMultiPolygon (Geometry geometry){
 		
-		FindIterable<BasicDBObject> list = collectionGeoData.find(
+		double[][][][] multiPolygonArea = geometry.getCoordinates();
+		FindIterable<BasicDBObject> list = collection.find(
 		            new BasicDBObject("location",
 		                new BasicDBObject("$geoWithin",
 		                        new BasicDBObject("$geometry",
@@ -157,7 +159,6 @@ public class GeoDataMONGO implements GeoDataRepository {
         for (BasicDBObject o : output) {
         	JsonObject jobj = jsonParser.parse(o.toString()).getAsJsonObject();
             result.add(jobj);
-            System.out.println(jobj);
         }
         return result;
 	}

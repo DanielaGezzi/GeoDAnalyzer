@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.gson.JsonObject;
 
 import facade.FacadeGeoData;
+import model.AdministrativeArea.Geometry;
 import model.GeoData.GeoData;
 import model.GeoData.Location;
 import persistence.GeoDataRepository;
@@ -47,12 +48,12 @@ public class FacadeGeoDataImpl implements FacadeGeoData {
 	}
 
 	@Override
-	public List<GeoData> getGeoDataWithinArea(double[][][][] multiPolygonArea) {
+	public List<GeoData> getGeoDataWithinArea(Geometry geometry) {
 		GeoDataRepository geoDataREP = new GeoDataMONGO();
 		List<GeoData> results = new ArrayList<GeoData>();
 		try{
 			
-			results = geoDataREP.findWithinMultiPolygon(multiPolygonArea);
+			results = geoDataREP.findWithinMultiPolygon(geometry);
 			
 		} catch(Exception e){
 			

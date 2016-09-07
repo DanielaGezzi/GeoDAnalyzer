@@ -23,6 +23,8 @@ import facade.FacadeGeoData;
 import facade.impl.FacadeAdministrativeAreaImpl;
 import facade.impl.FacadeGeoDataImpl;
 import model.AdministrativeArea.AdministrativeArea;
+import model.AdministrativeArea.Geometry;
+import model.GeoData.GeoData;
 import model.GeoData.Location;
 import twitter4j.TwitterException;
 
@@ -56,6 +58,7 @@ public class MyResource {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		System.out.println(results.toString());
 		return results.toString();}
     
     @GET
@@ -75,9 +78,31 @@ public class MyResource {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		System.out.println(results);
 		return results
 	;}
+    
+    @GET
+	@Path("/events/area/{id_area}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<GeoData> getResultsWithinArea(@PathParam("id_area") String id_area){
+		FacadeAdministrativeArea facadeAdminArea = new FacadeAdministrativeAreaImpl();
+		FacadeGeoData facadeGeoData = new FacadeGeoDataImpl();
+		List<GeoData> results = new ArrayList<GeoData>();
+		
+
+		try{
+			AdministrativeArea adminArea = facadeAdminArea.getAdministrativeArea(id_area);
+			Geometry geometry = new Geometry();
+			geometry.setType("MultiPoint");
+			geometry.setCoordinates(adminArea.getGeometry().getCoordinates());
+			results = facadeGeoData.getGeoDataWithinArea(geometry);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(results);
+		return results;
+	}
     
     @POST
     @Path("/admin/search/twitter")

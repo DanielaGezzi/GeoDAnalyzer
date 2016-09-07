@@ -27,8 +27,11 @@ function urlify(text) {
 }
 
 $(document).ready(function(){
-	
 	$("#searchButton").on("click", function(){
+		
+		  $('#Twitter_table').empty();
+ 	 	  $('#Facebook_table').empty();
+ 	 	  $('#Flickr_table').empty();
 		  
 		  var oms = new OverlappingMarkerSpiderfier(map);
 		  var address = document.getElementById("address").value;
@@ -49,13 +52,14 @@ $(document).ready(function(){
 		     	 	    	infowindow.setContent(marker.desc);
 		     	 	    	infowindow.open(map,marker);
 		     	 	    });
-		     	 	
 
-
+		     	 	 
 		    	  $.each(data, function(key,val){
 		        	 var myLatLng = {lat: val.location.coordinates[1], lng: val.location.coordinates[0]};
 		        		 if (val.platform == "Twitter"){
-		        			 var text = "<div class=\"infowindow-content\"><blockquote class=\"twitter-tweet\" lang=\"en\"><p>"+urlify(val.body)+"</p>" + val.author +" (@"+val.author+")</br><a href=\"https://twitter.com/statuses/"+val.id+"\">expand</a></blockquote></div>";
+		        			 var text = "<div class=\"infowindow-content\"><blockquote class=\"twitter-tweet\" lang=\"en\">" +
+		        			 			"<p>"+urlify(val.body)+"</p>" + val.author +" (@"+val.author+")</br>" +
+		        			 			"<a href=\"https://twitter.com/statuses/"+val.id+"\">expand</a></blockquote></div>";
 		        		        	 
 			     	 		 var marker = new google.maps.Marker({
 						          map: map,
@@ -91,8 +95,12 @@ $(document).ready(function(){
 			     	 	            }
 			     	 	        }(document, "script", "twitter-wjs");
 			     	 	    });	*/
+			     	 		var texttable = "<div class=\"infowindow-content\"><blockquote class=\"twitter-tweet\" lang=\"en\">" +
+    			 			"<p>"+urlify(val.body)+"</p>" + val.author +" (@"+val.author+")</br>" +
+    			 			"<a href=\"https://twitter.com/statuses/"+val.id+"\">expand</a></br>" +
+							"" + val.areaNation + " - " + val.areaRegion + " - " + val.areaDistrict + "<span class=\"ui-icon ui-icon-search\" value=\""+val._idAdminArea.$oid+"\"></span></blockquote></div>";
 			     	 		var table = $('<table></table>');
-			     	 		var row = $('<tr></tr>').append(text);
+			     	 		var row = $('<tr></tr>').append(texttable);
 			     	 		table.append(row);
 			     	 		$('#Twitter_table').append(table);
 			     	 	
@@ -101,7 +109,8 @@ $(document).ready(function(){
 		        			 var body = "no description available";
 		        			 if(val.body!=null) {body = val.body.substr(0,50);}
 		        			 //var text = "<div id=\"fb-root\"></div><div class=\"fb-post\" data-href=\"https://www.facebook.com/events/"+val.id+"/\" data-width=\"500\"></div>";
-							 var text = "<div class=\"infowindow-content2\"><blockquote class=\"facebook-event\" lang=\"en\"><p>"+val.title+"</p>" + body +" </br><a href=\"https://www.facebook.com/events/"+val.id+"\">more...</a></blockquote></div>";
+							 var text = "<div class=\"infowindow-content2\"><blockquote class=\"facebook-event\" lang=\"en\">" +
+							 			"<p>"+val.title+"</p>" + body +" </br><a href=\"https://www.facebook.com/events/"+val.id+"\">more...</a></blockquote></div>";
 
 		        			 //var text = ""+val.title+"</br>"+val.body;
 				        	 /*var infowindow = new google.maps.InfoWindow({
@@ -141,11 +150,13 @@ $(document).ready(function(){
 			     	 	            }
 			     	 	        }(document, "script", "facebook-jssdk");
 			     	 	    });*/
-							var texttable = "<div class=\"infowindow-content\"\"><blockquote class=\"facebook-event\" style=\"width:350px\"\ lang=\"en\"><p>"+val.title+"</p>" + body +" </br><a href=\"https://www.facebook.com/events/"+val.id+"\">more...</a></br>" + val.areaRegion + "</blockquote></div>";
+							var texttable = "<div class=\"infowindow-content\"\"><blockquote class=\"facebook-event\" style=\"width:400px\"\ lang=\"en\">" +
+									"<p>"+val.title+"</p>" + body +" </br><a href=\"https://www.facebook.com/events/"+val.id+"\">more...</a></br>" +
+											"" + val.areaNation + " - " + val.areaRegion + " - " + val.areaDistrict + "<span class=\"ui-icon ui-icon-search\"></span></blockquote></div>";
 			     	 		var table = $('<table></table>');
 			     	 		var row = $('<tr></tr>').append(texttable);
 			     	 		table.append(row);
-			     	 		$('#Facebook_table').append(table);
+			     	 		$('#Facebook_table').append(table).hide();
 		        		 }//chiudo if facebook
 		        		 else if (val.platform == "Flickr"){
 		        			 var text = "<img src=\""+val.body+"\"></br><a href=\""+val.title+"\">view on Flickr -></a>";
@@ -159,10 +170,12 @@ $(document).ready(function(){
 			     	 		
 			     	 		oms.addMarker(marker);
 			     	 		     	   
+			     	 		var texttable = "<img src=\""+val.body+"\"></br><a href=\""+val.title+"\">view on Flickr -></a></br>" +
+											"" + val.areaNation + " - " + val.areaRegion + " - " + val.areaDistrict + "<span class=\"ui-icon ui-icon-search\"></span>";
 			     	 		var table = $('<table></table>');
-			     	 		var row = $('<tr></tr>').append(text);
+			     	 		var row = $('<tr></tr>').append(texttable);
 			     	 		table.append(row);
-			     	 		$('#Flickr_table').append(table);
+			     	 		$('#Flickr_table').append(table).hide();
 		        		 }//chiudo if Flickr
 	     	 		});//chiudo each
 
@@ -174,7 +187,21 @@ $(document).ready(function(){
 		    }//chiudo else
 		  });//chiudo geocoder.geocode
 	});//chiudo search button on click
-	
+	$("#Facebook_Button").on("click", function(){
+		$('#Twitter_table').hide();
+	 	$('#Facebook_table').show();
+	 	$('#Flickr_table').hide();
+	});
+	$("#Twitter_Button").on("click", function(){
+		$('#Twitter_table').show();
+	 	$('#Facebook_table').hide();
+	 	$('#Flickr_table').hide();
+	});
+	$("#Flickr_Button").on("click", function(){
+		$('#Twitter_table').hide();
+	 	$('#Facebook_table').hide();
+	 	$('#Flickr_table').show();
+	});
 });//chiudo document ready
 
 

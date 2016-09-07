@@ -9,6 +9,7 @@
  
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="css/jquery-ui.min.css">
 <script src="js/bootstrap.js"></script>
 <script src="js/material.js"></script>
 <script src="js/oms.min.js"></script>
@@ -69,9 +70,9 @@
 		<button id="Flickr_Button" type="button" value="Flickr" class="btn btn-default">Flickr</button>
 	</div>
 	<div id="SN_table" style="overflow:auto">
-		<div id="Twitter_table" style="height: 420px; overflow:auto; display:none"></div>
+		<div id="Twitter_table" style="height: 420px; overflow:auto"></div>
 		<div id="Facebook_table" style="height: 420px; overflow:auto"></div>
-		<div id="Flickr_table" style="height: 420px; overflow:auto; display:none"></div>
+		<div id="Flickr_table" style="height: 420px; overflow:auto"></div>
 	</div>
 	</div>
 </div>
